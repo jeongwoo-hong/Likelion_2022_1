@@ -1,0 +1,23 @@
+{% extends 'blogPosts/../base.html' %}
+
+{% load static %}
+{% block content %}
+<script src="{% static 'tags/js/detail.js' %}"></script>
+<div>
+    <a href="{% url 'blogPosts:index' %}">home</a>
+    <h1 id="tag-element">{{tag.content}}</h1>
+    {% csrf_token %}
+    <input id="tag-edit-input" type="text" name="content" value='{{tag.content}}'/>
+    <button onclick="onEditTag({{tag.id}})">태그 수정</button>
+    <form action="{% url 'tags:delete' id=tag.id %}" method="POST">
+        {% csrf_token %}
+        <button>태그 삭제</button>
+    </form>
+<div>
+<h3>게시글 목록</h3>
+<div>
+    {% for post in posts %}
+        <a href="{% url 'blogPosts:show' id=post.id %}">{{post.title}}</a> </br>
+    {% endfor %}
+</div>
+{% endblock content %}

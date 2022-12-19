@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>new post</h1>
+  <form action="{% url 'blogPosts:index' %}" method="POST">
+    {% csrf_token %}
+    <p>태그 선택</p>
+    {% for tag in tags %}
+      {{ tag.content }}
+      <input name="tags" type="checkbox" value={{tag.id}} />
+    {% endfor %}
+    <p>title</p>
+    <input name="title" /> <br />
+    <p>content</p>
+    <textarea name="content" rows="30" cols="50"></textarea> <br />
+    <input type="submit" value="submit" />
+  </form>
+{% endblock content %}

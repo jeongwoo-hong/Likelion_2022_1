@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load sass_tags %}
+
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'blogPosts/scss/index.scss' %}">
+{% endblock style %}
+
+{% load static %}
+{% block js %}
+  <script type="module" src="{% static 'blogPosts/js/index.js' %}"></script>
+{% endblock js %}
+
+{% block content %}
+  <div class="tag-search-container">
+    <div class="tag-container">
+      태그
+      <div id="tag-list">
+        {% for tag in tags %}
+          <a href="{% url 'tags:read' id=tag.id %}">{{ tag.content }}</a>
+        {% endfor %}
+      </div>
+      {% if user.is_authenticated %}
+        {% csrf_token %}
+        <input id="tag-input" type="text" name="content"/>
+        <button onclick="onAddTag()">태그 추가</button>
+      {% endif %}
+    </div>
+    <div class="search-container">
+      <input id="search-bar" type="text" placeholder="타이틀을 입력해주세요">
+      <button id="search-btn">검색</button>
+    </div>
+  </div>
+  <h2 class="index-title">오늘의 고양이 🐱</h2>
+  <img id="cat-image" style="width: 300px;" />
+  <h1 class="index-title">
+    POSTS &nbsp;
+    {% if user.is_authenticated %}
+      <a type="button" class="btn btn-outline-success" href="{% url 'blogPosts:new' %}">New</a>
+    {% endif %}
+  </h1>
+
+  <div class="posts-container">
+    {% for post in posts %}
+      <div id="post-{{ post.id }}" class="card post-container" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title post-container-title">{{ post.title }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">작성자 :
+            {{ post.author }}</h6>
+          <p class="card-text">{{ post.content }}</p>
+          <div class="like-wrapper">
+            {% if user.is_authenticated %}
+              <a id="{{ post.id }}-like-button" onclick="onClickLikeButton({{ post.id }})">
+                {{ post.like_users.count }}
+                Likes
+              </a>
+            {% endif %}
+          </div>
+          <a href="{% url 'blogPosts:show' id=post.id %}" class="card-link">Show Detail</a>
+          {% if request.user == post.author %}
+            <a onclick="onDeletePost({{post.id}})">삭제</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <script src="{% static 'blogPosts/js/index2.js' %}"></script>
+{% endblock content %}

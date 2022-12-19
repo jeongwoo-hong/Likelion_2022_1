@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block js %}
+  <script type="module" src="{% static 'blogPosts/js/show.js' %}"></script>
+  <script src="{% static 'blogPosts/js/show2.js' %}"></script>
+{% endblock js %}
+{% block content %}
+  <div>
+    <a href="{% url 'blogPosts:index' %}">home</a>
+    <h1 id="post-title" data-post-id="{{ post.id }}">{{ post.title }}</h1>
+    <p>작성자:
+      {{ post.author }}</p>
+    <p>작성일:
+      {{ post.created_at }}</p>
+    <p style="width: 70%;">{{ post.content }}</p>
+    <div id="map" style="width:500px;height:400px;"></div>
+    <div id="weather"></div>
+    {% if request.user == post.author %}
+      <a href="{% url 'blogPosts:update' id=post.id %}">수정</a>
+      <a href="{% url 'blogPosts:delete' id=post.id %}">삭제</a>
+    {% endif %}
+    <div>
+      태그:
+      {% for tag in tags %}
+        <a href="{% url 'tags:read' id=tag.id %}">{{ tag.content }}</a>
+      {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+      <a id="{{post.id}}-show-like-button" onclick="onClickShowLikeButton({{post.id}})">
+        {{ post.like_users.count }}
+        Likes
+      </a>
+    {% endif %}
+    <p id="comment-count">
+      <strong>댓글이
+        {{ post.comment_set.count }}개 있습니다
+      </strong>
+      <p>
+
+        {% csrf_token %}
+        <input id="comment-input" type="text" name="content"/>
+        <button onclick="onAddComment({{post.id}})" type="submit">댓글 달기</button>
+        <div id="comment-list">
+          {% for comment in comments%}
+            <p id="post-{{post.id}}-comment-{{comment.id}}">
+              {{ comment.author }}:
+              {{ comment.content }}
+              &nbsp; &nbsp;{{ comment.created_at }}
+              {% if user.is_authenticated %}
+                <a id="{{comment.id}}-comment-like-button" onclick="onClickCommentLikeButton({{comment.id}})">
+                  {{ comment.like_users.count }}
+                  Likes
+                </a>
+              {% endif %}
+              <a onclick="onDeleteComment({{post.id}}, {{comment.id}})">댓글 삭제</a>
+            </p>
+          {% endfor %}
+        </div>
+      </div>
+      <script
+  type="text/javascript"
+  src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{ app_key }}"
+></script>
+<script src="{% static 'blogPosts/js/map.js' %}"></script>
+{% endblock content %}

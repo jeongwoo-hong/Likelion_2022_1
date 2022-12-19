@@ -1,0 +1,20 @@
+{% extends 'blogPosts/../base.html' %}
+{% block content %}
+
+<h1> My Info! </h1>
+<form method="POST" action="{%url 'info' id=user.id %}">
+    {% csrf_token %}
+    재학중인 학교:
+    <br>
+    <input name="college" type="text" value="">
+    <br>
+    <br>
+    전공:
+    <br>
+    <input name="major" type="text" value="">
+    <br>
+    <br>
+    <input type="submit" value="Sign Up!">
+</form>
+
+{% endblock content %}

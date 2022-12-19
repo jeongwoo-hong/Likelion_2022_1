@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'EliceDigitalBaeum_Bold';
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EliceDigitalBaeum_Bold.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal; }
+
+.index-title {
+  font-family: 'EliceDigitalBaeum_Bold';
+  margin: 35px 0 30px 0;
+  display: flex;
+  align-items: center; }
+
+.tag-search-container {
+  display: flex; }
+  .tag-search-container .tag-container {
+    width: 50%; }
+    .tag-search-container .tag-container a {
+      color: #000000; }
+      .tag-search-container .tag-container a:hover {
+        color: #9c79ff; }
+  .tag-search-container .search-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 50%; }
+    .tag-search-container .search-container #search-bar,
+    .tag-search-container .search-container #search-btn {
+      margin-right: 20px; }
+
+.posts-container {
+  display: flex;
+  flex-wrap: wrap; }
+  .posts-container .post-container.hide {
+    display: none; }
+  .posts-container .card {
+    margin: 0 25px 25px 0;
+    background-color: #f6f6f6;
+    border: none;
+    box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.15); }
+    .posts-container .card a {
+      color: #000000; }
+      .posts-container .card a:hover {
+        color: #9c79ff; }
+    .posts-container .card .like-wrapper a:hover {
+      color: #ffa8ec; }
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,64 @@
+html,
+body {
+  margin: 0;
+  padding: 0; }
+  html h1,
+  body h1 {
+    padding: 20px;
+    margin: 0; }
+
+body.gray {
+  background-color: #c8c8c8; }
+
+#signup-form {
+  margin-left: 20px; }
+  #signup-form input {
+    background-color: transparent; }
+    #signup-form input[type='password'], #signup-form input[type='text'] {
+      width: 400px; }
+
+#signup-error-modal {
+  box-sizing: border-box;
+  width: 400px;
+  height: 150px;
+  padding: 16px 20px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 10px #e7e7e7;
+  position: absolute;
+  z-index: -1;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  opacity: 0; }
+  #signup-error-modal.show {
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s; }
+  #signup-error-modal:hover {
+    box-shadow: 0px 5px 15px #e7e7e7; }
+  #signup-error-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; }
+    #signup-error-modal .modal-header .modal-title {
+      font-size: 32px;
+      font-weight: bold; }
+    #signup-error-modal .modal-header .close-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      font-size: 20px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      color: #ffa8a8;
+      padding: 4px; }
+      #signup-error-modal .modal-header .close-button:hover {
+        background-color: #ffd0d0;
+        border-radius: 100%; }
+
+/*# sourceMappingURL=signup.css.map */

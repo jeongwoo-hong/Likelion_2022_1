@@ -1,0 +1,1 @@
+web: gunicorn seminar.wsgi --log-file -
